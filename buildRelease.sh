@@ -1,4 +1,4 @@
-rm -rf RM*-*-*.tgz RM*-*-*.zip .sconsign.dblite dist build assets/resources/apps assets/resources/nfc/RMProTrainedAmiibo
+rm -rf RM*-*-*.tgz RM*-*-*.zip .sconsign.dblite dist build build/f7-firmware-C/resources/apps build/f7-firmware-C/resources/nfc/RMProTrainedAmiibo
 git pull
 ./fbt updater_package
 DATE_VAR=`date +%m%d`
@@ -13,13 +13,13 @@ cp -rf .blank_files/dolphinIntBlank/* assets/dolphin/internal/
 cp -rf .blank_files/animation_managerBLANK.c applications/services/desktop/animations/animation_manager.c
 ./fbt updater_package
 mv dist/f7-C/f7-update-RM420FAP "RM$DATE_VAR-$TIME_VAR-NoAnim"
-rm -rf assets/resources/dolphin/*
-cp -rf .blank_files/MjK_blank_128x64 assets/resources/dolphin/
-cp -rf .blank_files/manifest_None.txt assets/resources/dolphin/manifest_None.txt
-cp -rf .blank_files/manifest_None.txt assets/resources/dolphin/manifest.txt
-cd assets/resources
-tar -cf "../../RM$DATE_VAR-$TIME_VAR-NoAnim/resources.tar" *
-cd ../../
+rm -rf build/f7-firmware-C/resources/dolphin/*
+cp -rf .blank_files/MjK_blank_128x64 build/f7-firmware-C/resources/dolphin/
+cp -rf .blank_files/manifest_None.txt build/f7-firmware-C/resources/dolphin/manifest_None.txt
+cp -rf .blank_files/manifest_None.txt build/f7-firmware-C/resources/dolphin/manifest.txt
+cd build/f7-firmware-C/resources
+tar -cf "../../../RM$DATE_VAR-$TIME_VAR-NoAnim/resources.tar" *
+cd ../../../
 zip -rq "RM$DATE_VAR-$TIME_VAR-$VER_VAR-$HASH_VAR-NoAnim.zip" "RM$DATE_VAR-$TIME_VAR-NoAnim"
 tar -czf "RM$DATE_VAR-$TIME_VAR-$VER_VAR-$HASH_VAR-NoAnim.tgz" "RM$DATE_VAR-$TIME_VAR-NoAnim"
 rm -rf "RM$DATE_VAR-$TIME_VAR"

@@ -1,5 +1,6 @@
 #include "../picopass_i.h"
 #include <dolphin/dolphin.h>
+#include <picopass_keys.h>
 
 void picopass_scene_read_card_success_widget_callback(
     GuiButtonType result,
@@ -42,6 +43,8 @@ void picopass_scene_read_card_success_on_enter(void* context) {
         AA1[PICOPASS_ICLASS_PACS_CFG_BLOCK_INDEX].data, 0x00, PICOPASS_BLOCK_LEN);
     bool empty = picopass_is_memset(
         AA1[PICOPASS_ICLASS_PACS_CFG_BLOCK_INDEX].data, 0xFF, PICOPASS_BLOCK_LEN);
+    bool SE = 0x30 == AA1[PICOPASS_ICLASS_PACS_CFG_BLOCK_INDEX].data[0];
+    bool configCard = (AA1[PICOPASS_ICLASS_PACS_CFG_BLOCK_INDEX].data[7] >> 2 & 3) == 2;
 
     if(no_key) {
         furi_string_cat_printf(wiegand_str, "Read Failed");
@@ -59,6 +62,23 @@ void picopass_scene_read_card_success_on_enter(void* context) {
             "Menu",
             picopass_scene_read_card_success_widget_callback,
             picopass);
+        widget_add_button_element(
+            widget,
+            GuiButtonTypeRight,
+            "More",
+            picopass_scene_read_card_success_widget_callback,
+            picopass);
+    } else if(pacs->se_enabled) {
+        furi_string_cat_printf(credential_str, "SE enabled");
+        furi_string_cat_printf(wiegand_str, "SIO");
+        widget_add_button_element(
+            widget,
+            GuiButtonTypeRight,
+            "More",
+            picopass_scene_read_card_success_widget_callback,
+            picopass);
+    } else if(configCard) {
+        furi_string_cat_printf(wiegand_str, "Config Card");
     } else if(empty) {
         furi_string_cat_printf(wiegand_str, "Empty");
         widget_add_button_element(
@@ -69,15 +89,21 @@ void picopass_scene_read_card_success_on_enter(void* context) {
             picopass);
     } else if(pacs->bitLength == 0 || pacs->bitLength == 255) {
         // Neither of these are valid.  Indicates the block was all 0x00 or all 0xff
-        furi_string_cat_printf(wiegand_str, "Invalid PACS");
-
-        if(pacs->se_enabled) {
-            furi_string_cat_printf(credential_str, "SE enabled");
+        if(SE) {
+            furi_string_cat_printf(wiegand_str, "SIO");
+        } else {
+            furi_string_cat_printf(wiegand_str, "Invalid PACS");
         }
         widget_add_button_element(
             widget,
             GuiButtonTypeCenter,
             "Menu",
+            picopass_scene_read_card_success_widget_callback,
+            picopass);
+        widget_add_button_element(
+            widget,
+            GuiButtonTypeRight,
+            "More",
             picopass_scene_read_card_success_widget_callback,
             picopass);
     } else {
@@ -169,6 +195,10 @@ bool picopass_scene_read_card_success_on_event(void* context, SceneManagerEvent 
             consumed = scene_manager_search_and_switch_to_another_scene(
                 picopass->scene_manager, PicopassSceneStart);
         }
+    } else if(event.type == SceneManagerEventTypeBack) {
+        scene_manager_search_and_switch_to_previous_scene(
+            picopass->scene_manager, PicopassSceneStart);
+        consumed = true;
     }
     return consumed;
 }

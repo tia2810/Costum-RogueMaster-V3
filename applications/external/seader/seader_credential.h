@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <storage/storage.h>
 #include <dialogs/dialogs.h>
+#include "protocol/picopass_protocol.h"
 
 #define SEADER_CRED_NAME_MAX_LEN 22
 #define SEADER_APP_EXTENSION ".credential"
@@ -18,6 +19,7 @@ typedef enum {
     SeaderCredentialType14A,
     // Might need to make 14a into "javacard" and add Desfire
     SeaderCredentialTypeMifareClassic,
+    SeaderCredentialTypeVirtual,
 } SeaderCredentialType;
 
 typedef enum {
@@ -33,7 +35,7 @@ typedef struct {
     DialogsApp* dialogs;
     uint64_t credential;
     size_t bit_length;
-    uint8_t sio[64];
+    uint8_t sio[128];
     uint8_t diversifier[8];
     SeaderCredentialType type;
     SeaderCredentialSaveFormat save_format;

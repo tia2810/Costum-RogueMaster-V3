@@ -19,7 +19,7 @@
 #endif
 #define LOCLASS_MACS_TO_COLLECT (LOCLASS_NUM_CSNS * LOCLASS_NUM_PER_CSN)
 
-#define PICOPASS_DEV_NAME_MAX_LEN 22
+#define PICOPASS_DEV_NAME_MAX_LEN 129
 #define PICOPASS_READER_DATA_MAX_SIZE 64
 #define PICOPASS_MAX_APP_LIMIT 32
 
@@ -70,6 +70,8 @@ typedef enum {
 typedef enum {
     PicopassDeviceSaveFormatHF,
     PicopassDeviceSaveFormatLF,
+    PicopassDeviceSaveFormatSeader,
+    PicopassDeviceSaveFormatPartial,
 } PicopassDeviceSaveFormat;
 
 typedef enum {
@@ -102,7 +104,6 @@ typedef struct {
 typedef struct {
     PicopassBlock AA1[PICOPASS_MAX_APP_LIMIT];
     PicopassPacs pacs;
-    IclassEliteDictAttackData iclass_elite_dict_attack_data;
 } PicopassDeviceData;
 
 typedef struct {
@@ -119,7 +120,7 @@ typedef struct {
     Storage* storage;
     DialogsApp* dialogs;
     PicopassDeviceData dev_data;
-    char dev_name[PICOPASS_DEV_NAME_MAX_LEN + 1];
+    char dev_name[PICOPASS_DEV_NAME_MAX_LEN];
     FuriString* load_path;
     PicopassDeviceSaveFormat format;
     PicopassLoadingCallback loading_cb;
@@ -147,6 +148,6 @@ void picopass_device_set_loading_callback(
     PicopassLoadingCallback callback,
     void* context);
 
-ReturnCode picopass_device_parse_credential(PicopassBlock* AA1, PicopassPacs* pacs);
-ReturnCode picopass_device_parse_wiegand(uint8_t* credential, PicopassPacs* pacs);
+void picopass_device_parse_credential(PicopassBlock* AA1, PicopassPacs* pacs);
+void picopass_device_parse_wiegand(uint8_t* credential, PicopassPacs* pacs);
 bool picopass_device_hid_csn(PicopassDevice* dev);

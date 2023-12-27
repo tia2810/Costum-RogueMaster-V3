@@ -30,8 +30,11 @@ void picopass_scene_device_info_on_enter(void* context) {
     for(uint8_t i = 0; i < PICOPASS_BLOCK_LEN; i++) {
         furi_string_cat_printf(csn_str, "%02X ", csn[i]);
     }
+    bool sio = 0x30 == AA1[PICOPASS_ICLASS_PACS_CFG_BLOCK_INDEX].data[0];
 
-    if(pacs->bitLength == 0 || pacs->bitLength == 255) {
+    if(sio) {
+        furi_string_cat_printf(wiegand_str, "SIO");
+    } else if(pacs->bitLength == 0 || pacs->bitLength == 255) {
         // Neither of these are valid.  Indicates the block was all 0x00 or all 0xff
         furi_string_cat_printf(wiegand_str, "Invalid PACS");
     } else {
@@ -46,7 +49,7 @@ void picopass_scene_device_info_on_enter(void* context) {
         }
         furi_string_cat_printf(wiegand_str, "%d bits", pacs->bitLength);
 
-        if(pacs->sio) {
+        if(pacs->sio) { // SR
             furi_string_cat_printf(credential_str, " +SIO");
         }
     }
@@ -74,6 +77,12 @@ void picopass_scene_device_info_on_enter(void* context) {
         "Back",
         picopass_scene_device_info_widget_callback,
         picopass);
+    widget_add_button_element(
+        picopass->widget,
+        GuiButtonTypeRight,
+        "More",
+        picopass_scene_device_info_widget_callback,
+        picopass);
 
     view_dispatcher_switch_to_view(picopass->view_dispatcher, PicopassViewWidget);
 }
@@ -85,6 +94,9 @@ bool picopass_scene_device_info_on_event(void* context, SceneManagerEvent event)
     if(event.type == SceneManagerEventTypeCustom) {
         if(event.event == GuiButtonTypeLeft) {
             consumed = scene_manager_previous_scene(picopass->scene_manager);
+        } else if(event.event == GuiButtonTypeRight) {
+            scene_manager_next_scene(picopass->scene_manager, PicopassSceneMoreInfo);
+            consumed = true;
         } else if(event.event == PicopassCustomEventViewExit) {
             view_dispatcher_switch_to_view(picopass->view_dispatcher, PicopassViewWidget);
             consumed = true;

@@ -15,10 +15,10 @@
 #include <gui/modules/loading.h>
 #include <gui/modules/submenu.h>
 #include <gui/modules/dialog_ex.h>
+#include <gui/modules/variable_item_list.h>
 #include <gui/modules/text_input.h>
 #include <gui/modules/button_menu.h>
 #include <gui/modules/button_panel.h>
-#include <gui/modules/variable_item_list.h>
 
 #include <storage/storage.h>
 #include <dialogs/dialogs.h>
@@ -123,6 +123,7 @@ struct InfraredApp {
     InfraredProgressView* progress; /**< Custom view for showing brute force progress. */
 
     FuriString* file_path; /**< Full path to the currently loaded file. */
+    FuriString* button_name; /** Name of the button requested in RPC mode. */
     /** Arbitrary text storage for various inputs. */
     char text_store[INFRARED_TEXT_STORE_NUM][INFRARED_TEXT_STORE_SIZE + 1];
     InfraredAppState app_state; /**< Application state. */
