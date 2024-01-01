@@ -1,4 +1,4 @@
-REMOTE: /ext/infrared/Vizio.ir
+REMOTE: /ext/infrared/others/Vizio.ir
 UP: Up
 DOWN: Down
 LEFT: Left

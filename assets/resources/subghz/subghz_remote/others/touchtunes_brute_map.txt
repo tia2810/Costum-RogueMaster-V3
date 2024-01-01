@@ -1,0 +1,7 @@
+Filetype: Flipper SubGhz RAW File
+Version: 1
+UP: /any/subghz/others/TouchTunes/brute/P2_Edit_Queue.sub
+DOWN: /any/subghz/others/TouchTunes/brute/Pause.sub
+LEFT: /any/subghz/others/TouchTunes/brute/On_Off.sub
+RIGHT: /any/subghz/others/TouchTunes/brute/P1.sub
+OK: /any/subghz/others/TouchTunes/brute/OK.sub
