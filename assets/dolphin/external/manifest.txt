@@ -6,7 +6,7 @@ Min butthurt: 0
 Max butthurt: 5
 Min level: 1
 Max level: 30
-Weight: 3
+Weight: 2
 
 Name: L1_Laptop_128x51
 Min butthurt: 0
@@ -20,7 +20,7 @@ Min butthurt: 0
 Max butthurt: 10
 Min level: 1
 Max level: 30
-Weight: 3
+Weight: 2
 
 Name: L1_Recording_128x51
 Min butthurt: 0
@@ -69,14 +69,14 @@ Min butthurt: 0
 Max butthurt: 9
 Min level: 1
 Max level: 30
-Weight: 3
+Weight: 2
 
 Name: L1_Painting_128x64
 Min butthurt: 0
 Max butthurt: 7
 Min level: 1
-Max level: 30
-Weight: 3
+Max level: 1
+Weight: 2
 
 Name: L1_Leaving_sad_128x64
 Min butthurt: 14
@@ -85,19 +85,12 @@ Min level: 1
 Max level: 30
 Weight: 3
 
-Name: L2_Wake_up_128x64
-Min butthurt: 0
-Max butthurt: 12
-Min level: 2
-Max level: 30
-Weight: 3
-
 Name: L2_Furippa2_128x64
 Min butthurt: 0
 Max butthurt: 6
 Min level: 2
 Max level: 30
-Weight: 3
+Weight: 6
 
 Name: L2_Hacking_pc_128x64
 Min butthurt: 0
@@ -111,7 +104,7 @@ Min butthurt: 0
 Max butthurt: 10
 Min level: 2
 Max level: 30
-Weight: 3
+Weight: 6
 
 Name: L3_Furippa3_128x64
 Min butthurt: 0

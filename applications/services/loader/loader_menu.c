@@ -109,6 +109,78 @@ static void loader_menu_build_menu(LoaderMenuApp* app, LoaderMenu* menu) {
                 (uint32_t) "Settings",
                 loader_menu_switch_to_settings,
                 app);
+        } else if(strcmp(mainmenu_app->name, "Sub-GHz Bruteforcer") == 0) {
+            menu_add_item(
+                app->primary_menu,
+                "Sub-GHz Bruteforcer",
+                &A_SubBruteforcer_14,
+                (uint32_t)"/ext/apps/Sub-GHz/subghz_bruteforcer.fap",
+                loader_menu_callback,
+               (void*)menu);        
+        } else if(strcmp(mainmenu_app->name, "WiFi Marauder") == 0) {
+            menu_add_item(
+                app->primary_menu,
+                "WiFi Marauder",
+                &A_WiFiMarauder_14,
+                (uint32_t)"/ext/apps/GPIO/ESP32/wifi_marauder.fap",
+                loader_menu_callback,
+               (void*)menu);    
+        } else if(strcmp(mainmenu_app->name, "Evil Portal") == 0) {
+            menu_add_item(
+                app->primary_menu,
+                "Evil Portal",
+                &A_EvilPortal_14,
+                (uint32_t)"/ext/apps/GPIO/ESP32/evil_portal.fap",
+                loader_menu_callback,
+               (void*)menu);     
+        } else if(strcmp(mainmenu_app->name, "ESP Flasher") == 0) {
+            menu_add_item(
+                app->primary_menu,
+                "ESP Flasher",
+                &A_ESPFlasher_14,
+                (uint32_t)"/ext/apps/GPIO/esp_flasher.fap",
+                loader_menu_callback,
+               (void*)menu);      
+        } else if(strcmp(mainmenu_app->name, "BLE Spam") == 0) {
+            menu_add_item(
+                app->primary_menu,
+                "BLE Spam",
+                &A_BLESpam_14,
+                (uint32_t)"/ext/apps/Bluetooth/ble_spam.fap",
+                loader_menu_callback,
+               (void*)menu);           
+        } else if(strcmp(mainmenu_app->name, "RFID detector") == 0) {
+            menu_add_item(
+                app->primary_menu,
+                "RFID Detector",
+                &A_RFIDdetector_14,
+                (uint32_t)"/ext/apps/RFID/nfc_rfid_detector.fap",
+                loader_menu_callback,
+               (void*)menu);             
+        } else if(strcmp(mainmenu_app->name, "Bad KB") == 0) {
+            menu_add_item(
+                app->primary_menu,
+                "Bad KB",
+                &A_BadKb_14,
+                (uint32_t)"/ext/apps/USB/bad_kb.fap",
+                loader_menu_callback,
+               (void*)menu); 
+        } else if(strcmp(mainmenu_app->name, "GPIO Controller") == 0) {
+            menu_add_item(
+                app->primary_menu,
+                "GPIO Controller",
+                &A_GPIOController_14,
+                (uint32_t)"/ext/apps/GPIO/gpio_controller.fap",
+                loader_menu_callback,
+               (void*)menu);     
+        } else if(strcmp(mainmenu_app->name, "Wire Tester") == 0) {
+            menu_add_item(
+                app->primary_menu,
+                "Wire Tester",
+                &A_WireTester_14,
+                (uint32_t)"/ext/apps/GPIO/wire_tester.fap",
+                loader_menu_callback,
+               (void*)menu);                        
         } else {
             menu_add_item(
                 app->primary_menu,
