@@ -180,7 +180,23 @@ static void loader_menu_build_menu(LoaderMenuApp* app, LoaderMenu* menu) {
                 &A_WireTester_14,
                 (uint32_t)"/ext/apps/GPIO/wire_tester.fap",
                 loader_menu_callback,
-               (void*)menu);                        
+               (void*)menu);
+        } else if(strcmp(mainmenu_app->name, "Authenticator") == 0) {
+            menu_add_item(
+                app->primary_menu,
+                "Authenticator",
+                &A_Totp_14,
+                (uint32_t)"/ext/apps/Tools/totp.fap",
+                loader_menu_callback,
+               (void*)menu);
+        } else if(strcmp(mainmenu_app->name, "Bluetooth Remote") == 0) {
+            menu_add_item(
+                app->primary_menu,
+                "Flipper Remote",
+                &A_BThid_14,
+                (uint32_t)"/ext/apps/Bluetooth/bluetoothremote.fap",
+                loader_menu_callback,
+               (void*)menu);                                   
         } else {
             menu_add_item(
                 app->primary_menu,
